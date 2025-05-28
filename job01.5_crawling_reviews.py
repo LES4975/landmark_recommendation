@@ -121,17 +121,17 @@ def click_review_tab(driver):
         print(f"🚨 리뷰 탭 클릭 중 오류 발생: {e}")
         return False
 
-def scroll_review_section(driver, max_reviews=30):
+def scroll_review_section(driver, max_reviews=50):
     # 스크롤 다운을 통해 리뷰 로드하기
     scrollable_div = driver.find_element(By.CSS_SELECTOR, 'div.m6QErb.DxyBCb.kA9KIf.dS8AEf')
 
-    for _ in range(10):
+    for _ in range(20):
         driver.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', scrollable_div)
         time.sleep(0.2)
 
     print(f"📜 리뷰 스크롤 종료")
 
-def extract_reviews(driver, max_reviews=30):
+def extract_reviews(driver, max_reviews=50):
     # 데이터 수집
     # review_elements = driver.find_elements(By.CLASS_NAME, 'wiI7pd')
     try:
@@ -171,7 +171,7 @@ def main():
         time.sleep(random.uniform(1.5, 2.5))
 
         if success:
-            reviews, ratings = collect_reviews_for_place(driver, max_reviews=30)  # ✅ 여기!
+            reviews, ratings = collect_reviews_for_place(driver, max_reviews=50)  # ✅ 여기!
             concat_reviews = ' '.join(reviews)
             all_reviews.append(concat_reviews)
             concat_ratings = ' '.join(ratings)
