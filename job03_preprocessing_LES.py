@@ -76,3 +76,8 @@ for path in local:
         df = df[~df['names'].str.contains(word, na=False, case=False)]
     df.info()
     df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
+
+for path in local:
+    df = pd.read_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv')
+    df.dropna(inplace=True)
+    df.info()
