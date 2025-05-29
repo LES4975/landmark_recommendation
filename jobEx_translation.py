@@ -2,20 +2,16 @@ import pandas as pd
 import re
 from googletrans import Translator
 
-# CSV 파일 불러오기
-df = pd.read_csv('your_file.csv')  # 파일 경로 수정
-
 translator = Translator()
 
 # 영어 문자열만 판별하는 함수
 def is_english_only(text):
     return bool(re.fullmatch(r'[A-Za-z\s]+', str(text)))
 
-folders = ['./dataset/LES/cleaned_reviews/', './dataset/PMW/cleaned_reviews/', './dataset/KMJ/cleaned_reviews/']
-NAME = ['LES', 'PMW', 'KMJ']
+paths = ['./dataset/LES/cleaned_reviews/LES', './dataset/PMW/cleaned_reviews/PMW', './dataset/KMJ/cleaned_reviews/KMJ']
 
 for i in range(3):
-    df = pd.read_csv(folders[i] + NAME[i] + '_All_cleaned_reviews.csv')
+    df = pd.read_csv(paths[i] + '_All_cleaned_reviews.csv')
     df.info()
     print(df.head())
 
@@ -36,4 +32,4 @@ for i in range(3):
     df['names'] = translated_names
 
     # 수정된 결과 저장
-    df.to_csv(folders[i] + NAME[i] + '_All_cleaned_reviews.csv', index=False, encoding='utf-8-sig')
+    df.to_csv(paths[i] + '_All_cleaned_reviews.csv', index=False, encoding='utf-8-sig')
