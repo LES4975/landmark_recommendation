@@ -12,8 +12,8 @@ mpl.rcParams['axes.unicode_minus'] = False
 rc('font', family=font_name)
 
 # 임베딩 모델로 key_word과 유사한 단어 찾기
-embedding_model = Word2Vec.load('./models/LES_word2vec_landmark_review.models')
-key_word = ('경치')
+embedding_model = Word2Vec.load('./models/word2vec_landmark_review.models')
+key_word = ('추천')
 sim_word = embedding_model.wv.most_similar(key_word, topn=10) # 공간적으로 가까이 있는 단어 찾기
 print(sim_word)
 
