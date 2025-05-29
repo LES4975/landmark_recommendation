@@ -55,4 +55,4 @@ for path in local:
 
     df.info()
 
-    df.to_csv('./dataset/LES/' + path + '_cleaned_reviews.csv', index=False)
+    df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
