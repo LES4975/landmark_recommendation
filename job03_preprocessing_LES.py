@@ -6,7 +6,7 @@ from konlpy.tag import Okt
 # 불용어 제거
 stop_words = ['이다', '아니다', '그렇다', '하다', '있다',
               '보다', '보고', '없다', '오다', '같은', '같다',
-              '않다', '되다', '되어다'] # 리뷰 판별에 별 도움 안 되는 형태소들(필요할 때마다 추가)
+              '않다', '되다', '되어다', '야하다'] # 리뷰 판별에 별 도움 안 되는 형태소들(필요할 때마다 추가)
 
 folder = './dataset/LES/google_maps_reviews/' # 데이터셋 저장 경로
 local = ['Chungbuk', 'Chungnam', 'Daegu', 'Jeonnam', 'Ulsan'] # 지역명
