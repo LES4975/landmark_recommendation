@@ -3,8 +3,9 @@ import pandas as pd
 import re
 from konlpy.tag import Okt
 
-# 불용어 제거 - (05/26 추가)
-stop_words = ['이다', '아니다', '그렇다'] # 리뷰 판별에 별 도움 안 되는 형태소들(필요할 때마다 추가)
+# 불용어 제거
+stop_words = ['이다', '아니다', '그렇다', '하다', '있다',
+              '보다', '보고', '없다', '오다'] # 리뷰 판별에 별 도움 안 되는 형태소들(필요할 때마다 추가)
 
 folder = './dataset/LES/google_maps_reviews/' # 데이터셋 저장 경로
 local = ['Chungbuk', 'Chungnam', 'Daegu', 'Jeonnam', 'Ulsan'] # 지역명
@@ -52,7 +53,26 @@ for path in local:
 
     df.dropna(inplace=True) # 결측치 제거
     df.drop_duplicates(inplace=True)
-
+    df = df.drop('rating', axis=1)
     df.info()
 
+    df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
+
+# 불필요한 장소를 쳐내기 위한 확인용 코드
+for path in local:
+    df = pd.read_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv')
+    print("####################")
+    print(path)
+    for name in df.names:
+        print(name)
+
+for path in local:
+    df = pd.read_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv')
+    # 불필요한 장소 데이터 제거
+    remove_keywords = ['소녀상', '시청', '문화센터', '휴게소', '문화체육센터',
+                       '스타디움', '대구제일교회', '운동장', '캠퍼스', '문화의집',
+                       'DGB', '서킷', '경기장', '한복입고', '아카데미']
+    for word in remove_keywords:
+        df = df[~df['names'].str.contains(word, na=False, case=False)]
+    df.info()
     df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
