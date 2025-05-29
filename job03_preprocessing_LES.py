@@ -12,6 +12,7 @@ okt = Okt()
 
 for path in local:
     df = pd.read_csv(folder + path + '_reviews.csv')
+    df.dropna(inplace=True)
     df.info()
     print(df.head())
 
@@ -38,8 +39,8 @@ for path in local:
 
     # 평점 계산하기
     average_list = []
-    for rating in df.ratings:
-        r = [int(num) for num in rating if num.isdigit()]
+    for rate in df.rating:
+        r = [int(num) for num in rate if num.isdigit()]
         print(r)
         average = sum(r) / len(r)
         print(average)
