@@ -2,6 +2,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.io import mmwrite, mmread
 
+# 전처리한 데이터셋을 하나로 합친 뒤 TF-IDF 구하기
+
 local_LES = ['Chungbuk', 'Chungnam', 'Daegu', 'Jeonnam', 'Ulsan'] # 지역명
 local_PMW = ['Busan', 'Gyeongsangbuk_do', 'Gyeongsangnam_do', 'Jeollabuk_do', 'Seoul']
 location = [local_LES, local_PMW]
@@ -33,6 +35,10 @@ for i in range(2):
 
     all_reviews = pd.concat([all_reviews, df_reviews], ignore_index=True)
     all_landmark = pd.concat([all_landmark, df_landmark], ignore_index=True)
+
+# 중복 제거
+all_reviews = all_reviews.drop_duplicates()
+all_landmark = all_landmark.drop_duplicates(subset='reviews')
 
 all_reviews.to_csv('./dataset/All_only_reviews.csv', index=False)
 all_landmark.to_csv('./dataset/All_cleaned_reviews.csv', index=False)
