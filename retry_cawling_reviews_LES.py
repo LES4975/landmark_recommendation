@@ -158,11 +158,11 @@ def collect_reviews_for_place(driver, max_reviews):
 
 
 def main():
-    target_name = "무창포타워"  # 🔍 수정할 장소명
-    target_url = "https://maps.app.goo.gl/DezCVrez8WdgMYV78"  # 🌐 직접 복사한 Google Maps URL
+    target_name = "경복궁"  # 🔍 수정할 장소명
+    target_url = "https://maps.app.goo.gl/S2KKseRpFqeuTvox6"  # 🌐 직접 복사한 Google Maps URL
 
     # CSV 불러오기
-    df = pd.read_csv("./dataset/LES/google_maps_reviews/Chungnam_reviews.csv")
+    df = pd.read_csv("./dataset/PMW/google_maps_reviews/Seoul_reviews.csv")
 
     # 해당 장소 찾기
     idx = df[df["names"] == target_name].index
@@ -191,7 +191,7 @@ def main():
     driver.quit()
 
     # CSV 덮어쓰기
-    df.to_csv("./dataset/LES/google_maps_reviews/Chungnam_reviews.csv", index=False, encoding="utf-8-sig")
+    df.to_csv("./dataset/PMW/google_maps_reviews/Seoul_reviews.csv", index=False, encoding="utf-8-sig")
 
     print("✅ 저장 완료")
 
