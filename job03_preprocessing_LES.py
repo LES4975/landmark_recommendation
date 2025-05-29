@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import re
 from konlpy.tag import Okt
@@ -41,8 +42,10 @@ for path in local:
     average_list = []
     for rate in df.rating:
         r = [int(num) for num in rate if num.isdigit()]
-        print(r)
-        average = sum(r) / len(r)
+        if len(r) == 0:
+            average = np.nan
+        else:
+            average = sum(r) / len(r)
         print(average)
         average_list.append(average)
     df['average_rating'] = average_list # 평점 평균을 데이터프레임에 추가
