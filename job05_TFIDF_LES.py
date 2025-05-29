@@ -6,16 +6,18 @@ folder = './dataset/LES/cleaned_reviews/' # 데이터셋 저장 경로
 local = ['Chungbuk', 'Chungnam', 'Daegu', 'Jeonnam', 'Ulsan'] # 지역명
 
 df_reviews = pd.DataFrame(columns=['reviews'])
+df_landmark = pd.DataFrame(columns=['names', 'reviews', 'average_rating', 'location'])
 
 for path in local:
     df = pd.read_csv(folder + path + '_cleaned_reviews.csv')
     df.info()
 
+    df_landmark = pd.concat([df_landmark, df], ignore_index=True)
     df_reviews = pd.concat([df_reviews, df[['reviews']]], ignore_index=True)
     df_reviews.info()
     print(df_reviews.head())
-
-    df_reviews.to_csv('./dataset/LES/cleaned_reviews/only_reviews.csv', index=False)
+df_landmark.to_csv('./dataset/LES/cleaned_reviews/All_cleaned_reviews.csv', index=False)
+df_reviews.to_csv('./dataset/LES/cleaned_reviews/only_reviews.csv', index=False)
 
 tfidf = TfidfVectorizer(sublinear_tf=True)
 tfidf_matrix = tfidf.fit_transform(df_reviews['reviews'])
