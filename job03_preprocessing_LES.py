@@ -77,7 +77,11 @@ for path in local:
     df.info()
     df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
 
+# 중복 제거하고 혹시 몰라서 '지역' column 추가해 두기
 for path in local:
     df = pd.read_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv')
     df.dropna(inplace=True)
+    df['location'] = path
     df.info()
+    print(df.head())
+    df.to_csv('./dataset/LES/cleaned_reviews/' + path + '_cleaned_reviews.csv', index=False)
