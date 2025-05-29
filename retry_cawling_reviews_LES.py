@@ -165,7 +165,7 @@ def main():
     df = pd.read_csv("./dataset/PMW/google_maps_reviews/Seoul_reviews.csv")
 
     # 해당 장소 찾기
-    idx = df[df["names"] == target_name].index
+    idx = df[df["name"] == target_name].index
     if len(idx) == 0:
         print(f"❌ '{target_name}' 해당 행을 찾을 수 없습니다.")
         return
@@ -181,15 +181,15 @@ def main():
     try:
         reviews, ratings = collect_reviews_for_place(driver, max_reviews=50)
         df.at[row_index, "reviews"] = ' '.join(reviews)
-        df.at[row_index, "rating"] = ' '.join(ratings)
+        df.at[row_index, "ratings"] = ' '.join(ratings)
         print(f"📝 리뷰/평점 갱신 완료: {target_name}")
     except Exception as e:
         print(f"⚠️ 크롤링 실패: {e}")
         df.at[row_index, "reviews"] = "?"
-        df.at[row_index, "rating"] = "?"
+        df.at[row_index, "ratings"] = "?"
 
     driver.quit()
-
+    # df = df.drop('rating', axis=1)
     # CSV 덮어쓰기
     df.to_csv("./dataset/PMW/google_maps_reviews/Seoul_reviews.csv", index=False, encoding="utf-8-sig")
 
